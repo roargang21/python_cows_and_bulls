@@ -4,8 +4,6 @@
 x = []
 ## to create a function which knows all 3 digits of the number is different
 ## let this function be called numbers()
-f =[]
-
 def numbers(element):
     if element//100 != (element%100)//10 != (element%100)%10 and (element%100)%10 != element//100:
         x.append(element)
@@ -21,9 +19,10 @@ def numtwo(elementwo):
 for elementwo in range(11,100):
     numtwo(elementwo)
 
-  
-## extending the list with the numbers that have 0 in front
+## extending numbers with 0 in front
+## c is not neccessary anymore
 x.extend(c)
+c.clear()
 
 ## guess 1 is always the same 
 guess_one = 123
@@ -39,7 +38,7 @@ def rem(i):
         x.remove(i)
     elif i//100 == 3 or (i%100)//10 == 3 or (i%100)%10 == 3 or i//10 ==3 or i%10 ==3:
         x.remove(i)
-
+##removing element if input is more than 0
 def rem_two():
     if user_input == 1 or user_input == 10:
         for i in x:
@@ -76,6 +75,10 @@ def rem_two():
               (i//100 == 3 or (i%100)//10 == 3 or (i%100)%10 == 3 or i//10 ==3 or i%10 ==3):
                 f.append(i)
 
+## f is the main list for the main() loop
+f = []
+                
+## to append all the numbers into f
 if user_input == 0:
     for i in x:
         rem(i)
@@ -84,138 +87,89 @@ if user_input == 0:
     f.extend(x)
 elif user_input == 30:
     print("You have won")
-    print("Number of guesses = 1")
+    print("Count = 1")
 elif user_input > 0:
     rem_two()
 
 
-guess_two_onwards = f[0]
-## for 3 digits number that dosent start with 0
-g = guess_two_onwards//100 ##hundreds place
-h = (guess_two_onwards%100)//10 ##tens place
-z = (guess_two_onwards%100)%10 ## ones place
-## count number of turns\
-count = 1
+## to keep track of number of tries    
+if user_input != 30:
+    print("count = 1")
 
+## defining count
+count = 1
+## creating a copy og loop to cycle through
+f_copy = f.copy()
 ## main loop to find out the number
-def main():
+while user_input != 30:
+
+    if f[0] > 99:
+        print("My guess is {}".format(f[0]))
+    else:
+        print("My guess is 0{}".format(f[0]))
+    user_input = int(input("Please input a bull b cow : "))
+
+    g = f[0]//100 ##hundreds place
+    h = (f[0]%100)//10 ##tens place
+    z = f[0]%10 ## ones place
+    if len(f) == 1 :
+        print("My guess is {}".format(f[0]))
+        user_input = int(input("Please input a bull b cow : "))
+        if user_input == 30:
+            break
     if user_input == 1 or user_input == 10:
         for i in f:
-              if not ( (i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g) and \
-              not (i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h) and not \
-              (i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z) ):
-                f.remove(i)
-              elif not ( (i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 ==h or i%10 ==h) and \
-              not (i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 == g or i%10 == g) and not \
-              (i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z) ):
-                f.remove(i)
-              elif not ( (i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z) and \
-              not (i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h) and not \
-              (i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g) ):
-                f.remove(i)
+              if not ( (i//100 == g or (i%100)//10 == g or i%10 == g or i//10 ==g or i%10 ==g) and \
+              not (i//100 == h or (i%100)//10 == h or i%10 == h or i//10 == h or i%10 == h) and not \
+              (i//100 == z or (i%100)//10 == z or i%10 == z or i//10 ==z or i%10 ==z) ):
+                f_copy.remove(i)
+              elif not ( (i//100 == h or (i%100)//10 == h or i%10 == h or i//10 ==h or i%10 ==h) and \
+              not (i//100 == g or (i%100)//10 == g or i%10 == g or i//10 == g or i%10 == g) and not \
+              (i//100 == z or (i%100)//10 == z or i%10 == z or i//10 ==z or i%10 ==z) ):
+                f_copy.remove(i)
+              elif not ( (i//100 == z or (i%100)//10 == z or i%10 == z or i//10 ==z or i%10 ==z) and \
+              not (i//100 == h or (i%100)//10 == h or i%10 == h or i//10 == h or i%10 == h) and not \
+              (i//100 == g or (i%100)//10 == g or i%10 == g or i//10 ==g or i%10 ==g) ):
+                f_copy.remove(i)
+                
     elif user_input == 0:
         for i in f:
-                if i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g:
-                    f.remove(i)
-                elif i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h:
-                    f.remove(i)
-                elif i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z:
-                    f.remove(i)
-                    
-        for i in f:
-                if i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g:
-                    f.remove(i)
-                elif i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h:
-                    f.remove(i)
-                elif i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z:
-                    f.remove(i)
-        for i in f:
-                if i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g:
-                    f.remove(i)
-                elif i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h:
-                    f.remove(i)
-                elif i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z:
-                    f.remove(i)
-        for i in f:
-                if i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g:
-                    f.remove(i)
-                elif i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h:
-                    f.remove(i)
-                elif i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z:
-                    f.remove(i)
-                    
-        for i in f:
-                if i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g:
-                    f.remove(i)
-                elif i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h:
-                    f.remove(i)
-                elif i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z:
-                    f.remove(i)
-        for i in f:
-                if i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g:
-                    f.remove(i)
-                elif i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h:
-                    f.remove(i)
-                elif i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z:
-                    f.remove(i)
-        for i in f:
-                if i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g:
-                    f.remove(i)
-                elif i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h:
-                    f.remove(i)
-                elif i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z:
-                    f.remove(i)
-                    
-        for i in f:
-                if i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g:
-                    f.remove(i)
-                elif i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h:
-                    f.remove(i)
-                elif i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z:
-                    f.remove(i)
-       
-        
-                    
+                if i//100 == g or (i%100)//10 == g or i%10 == g or i//10 ==g or i%10 ==g:
+                    f_copy.remove(i)
+                elif i//100 == h or (i%100)//10 == h or i%10 == h or i//10 == h or i%10 == h:
+                    f_copy.remove(i)
+                elif i//100 == z or (i%100)//10 == z or i%10 == z or i//10 ==z or i%10 ==z:
+                    f_copy.remove(i)
+
+    
     elif user_input == 2 or user_input == 20 or user_input == 11:
         for i in f:
-              if not ( (i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g) and \
-               (i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h) and not \
-              (i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z) ):
-                f.remove(i)
-              elif not ( (i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z) and \
-               (i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 == g or i%10 == g) and not \
-              (i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 ==h or i%10 ==h) ):
-                f.remove(i)
-              elif not ( (i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z) and \
-               (i//100 ==h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h) and not \
-              (i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g) ):
-                f.remove(i)
+              if not ( (i//100 == g or (i%100)//10 == g or i%10 == g or i//10 ==g or i%10 ==g) and \
+               (i//100 == h or (i%100)//10 == h or i%10 == h or i//10 == h or i%10 == h) and not \
+              (i//100 == z or (i%100)//10 == z or i%10 == z or i//10 ==z or i%10 ==z) ):
+                f_copy.remove(i)
+              elif not ( (i//100 == z or (i%100)//10 == z or i%10 == z or i//10 ==z or i%10 ==z) and \
+               (i//100 == g or (i%100)//10 == g or i%10 == g or i//10 == g or i%10 == g) and not \
+              (i//100 == h or (i%100)//10 == h or i%10 == h or i//10 ==h or i%10 ==h) ):
+                f_copy.remove(i)
+              elif not ( (i//100 == z or (i%100)//10 == z or i%10 == z or i//10 ==z or i%10 ==z) and \
+               (i//100 ==h or (i%100)//10 == h or i%10 == h or i//10 == h or i%10 == h) and not \
+              (i//100 == g or (i%100)//10 == g or i%10 == g or i//10 ==g or i%10 ==g) ):
+                f_copy.remove(i)
+            
     else:
         for i in f:
-              if not ( (i//100 == g or (i%100)//10 == g or (i%100)%10 == g or i//10 ==g or i%10 ==g) and \
-               (i//100 == h or (i%100)//10 == h or (i%100)%10 == h or i//10 == h or i%10 == h) and  \
-              (i//100 == z or (i%100)//10 == z or (i%100)%10 == z or i//10 ==z or i%10 ==z) ):
-                f.remove(i)
-
-
-while user_input != 30:
-    print("My guess is {}".format(guess_two_onwards))
-    user_input = int(input("Please input a bull b cow : "))
-    guess_two_onwards = f[0]
-    main()
+              if not ( (i//100 == g or (i%100)//10 == g or i%10 == g or i//10 ==g or i%10 ==g) and \
+               (i//100 == h or (i%100)//10 == h or i%10 == h or i//10 == h or i%10 == h) and  \
+              (i//100 == z or (i%100)//10 == z or i%10 == z or i//10 ==z or i%10 ==z) ):
+                f_copy.remove(i)
+    f = f_copy
+    f.remove(f[0])
     count = count + 1
-    print(f)
+    print("Count = {}".format(count))
     
+    
+
+
+
 print("You have won. Count = {}".format(count))
-    
-    
-    
-    
-
-print(len(f))
-print(f)     
-
-#print(x)
-
-
-
